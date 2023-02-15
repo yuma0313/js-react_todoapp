@@ -61,6 +61,7 @@ input[type='text']::placeholder {
   font-size: 24px;
   font-family: 'Times New Roman', Times, serif;
   color: #fff;
+  cursor: pointer;
 }
 
 .fas {
@@ -73,4 +74,11 @@ input[type='text']::placeholder {
 
 .fas::before{
 	content: '\f2ed';
+}
+
+.update-button {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  color: white;
+  background-color: transparent;
 }

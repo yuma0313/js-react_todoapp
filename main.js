@@ -1,5 +1,6 @@
 const taskValue = document.getElementsByClassName('task_value')[0];
 const todolist = document.getElementsByClassName('todolist')[0];
+let editForm;
 
 //タスク追加時の関数
 const addTasks = (task) => {
@@ -23,6 +24,25 @@ const addTasks = (task) => {
     evt.preventDefault();
     deleteTasks(deleteButton);
   });
+
+  //既存タスクをクリックし、イベント発動（タスク編集）
+  spanItem.addEventListener('click', evt => {
+    evt.preventDefault();
+    task = spanItem.innerHTML;
+    editTask(spanItem,task);
+  });
+
+  //タスクを更新するボタンを追加
+  const updateButton = document.createElement('button');
+  updateButton.className = 'update-button';
+  updateButton.innerHTML = '更新';
+  listItem.appendChild(updateButton);
+
+  //更新ボタンをクリックし、イベント発動（タスク更新）
+  updateButton.addEventListener('click', evt => {
+    evt.preventDefault();
+    updateTask(spanItem);
+  });
 }
 
 //削除ボタンにタスクを消すための機能をつける
@@ -42,3 +62,21 @@ function evt(e) {
     taskValue.value = "";
   }
 };
+
+//taskをクリックした際に編集できるようにする
+const editTask = (spanItem, task) => {
+  const textArea = document.createElement('input');
+  textArea.className = 'editForm';
+  textArea.value = task;
+  spanItem.replaceWith(textArea);
+  editForm = textArea;
+}
+
+//Enter押下時にイベント発動（タスク更新）
+const updateTask = (spanItem) => {
+    const chosenTask = document.getElementsByClassName('editForm')[0];
+    const updatedValue = chosenTask.value;
+    //spanタグに変換する
+    spanItem.innerHTML = updatedValue;
+    chosenTask.replaceWith(spanItem);
+}
