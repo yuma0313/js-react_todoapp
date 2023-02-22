@@ -81,4 +81,5 @@ input[type='text']::placeholder {
   font-weight: bold;
   color: white;
   background-color: transparent;
+  cursor: pointer;
 }

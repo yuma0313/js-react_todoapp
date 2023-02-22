@@ -1,18 +1,19 @@
 import React from 'react'
+import Task from './Task';
 
 const TodoList = (props) => {
-  const { task, onClickDelete } = props;
+  const { task, onClickDelete, editTask, editText } = props;
 
   return (
     <div className="common-area">
       <ul className="todolist">
         {task.map((todo, index) => {
-          return (
-            <li key={index} className='todo'>
-              <span className='todo_task' >{todo}</span>
-              <i className="fas fa-trash-alt" onClick={() => onClickDelete(index)}></i>
-            </li>
-          )
+          return < Task todo={todo}
+            index={index}
+            onClickDelete={onClickDelete}
+            editTask={editTask}
+            editText={editText}
+          />;
         })}
       </ul>
     </div>
