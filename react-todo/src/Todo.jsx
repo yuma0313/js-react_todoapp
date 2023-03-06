@@ -15,6 +15,16 @@ export const Todo = () => {
     }
   ]);
   const [uniqueId, setUniqueId] = useState(task.length);
+  const [searchText, setSearchText] = useState('');
+  const [showTodoList, setShowTodoList] = useState([
+    {
+      id: 1,
+      title: 'あああ'
+    }, {
+      id: 2,
+      title: 'いいい'
+    }
+  ]);
 
   //入力値を取得する
   const getValue = (e) => {
@@ -40,21 +50,21 @@ export const Todo = () => {
     }
   }
 
-  // const editTask = (e) => {
-  //   setEditText(task.title);
-  //   setEditText(e.target.value);
-  //   // //フォームが未入力ならreturn
-  //   // if (todoText === "") return;
-  //   // const newTodos = [...task];
-  //   // newTodos[index].title = value;
-  //   // // newTodos = newTodos.map((todo, todoIndex) => {
-  //   // //   if (todoIndex === index) {
-  //   // //     todo.title = value;
-  //   // //   }
-  //   // // })
-  //   // console.log(value);
-  //   // setTask(newTodos);
-  // }
+  const getSearchValue = (e) => {
+    const keyWord = e.target.value;
+    setSearchText(keyWord);
+
+    const searchedTodoList = onChangeTaskSearch(keyWord)
+    setShowTodoList(searchedTodoList);
+  }
+
+  const onChangeTaskSearch = (keyWord) => {
+    const searchTask = task.filter((todo) => {
+      const regexp = new RegExp("^" + keyWord, "i");
+      return todo.title.match(regexp);
+    });
+    return searchTask;
+  }
 
   return (
     <>
@@ -63,7 +73,7 @@ export const Todo = () => {
         <h1 className="title">Todo List</h1>
         < InputText todoText={todoText} getValue={getValue} addTask={addTask} />
         <div className="common-area">
-          <input placeholder="Search Keyword" />
+          <input placeholder="Search Keyword" onInput={getSearchValue} value={searchText} />
         </div>
         <TodoList task={task}
           onClickDelete={onClickDelete}

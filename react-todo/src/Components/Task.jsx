@@ -7,9 +7,6 @@ const Task = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(todo.title);
 
-  // const startEditing = () => setIsEditing(true)
-  // const finishEditing = () => setIsEditing(false)
-
   const onClickTodo = (index) => {
     setIsEditing(true);
   }
